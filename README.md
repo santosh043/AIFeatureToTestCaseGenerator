@@ -16,14 +16,14 @@ This project uses **Ollama** (specifically the `llama3.2:3b` model) running loca
 ### System Flow
 ```mermaid
 graph TD
-    User[User] -->|Types Feature| UI[Web Interface \n(HTML/JS)]
-    UI -->|POST /generate| Backend[Flask Backend \n(Python)]
-    Backend -->|Prompts| Ollama[Ollama API \n(Localhost:11434)]
-    Ollama -->|Inference| Model[Llama 3.2:3b]
-    Model -->|JSON Response| Ollama
-    Ollama -->|Raw JSON| Backend
-    Backend -->|Validated JSON| UI
-    UI -->|Render Table| User
+    User[User] -->|Types Feature| UI["Web Interface\n(HTML/JS)"]
+    UI -->|"POST /generate"| Backend["Flask Backend\n(Python)"]
+    Backend -->|Prompts| Ollama["Ollama API\n(Localhost:11434)"]
+    Ollama -->|Inference| Model["Llama 3.2:3b"]
+    Model -->|"JSON Response"| Ollama
+    Ollama -->|"Raw JSON"| Backend
+    Backend -->|"Validated JSON"| UI
+    UI -->|"Render Table"| User
 ```
 
 ### Sequence Diagram
