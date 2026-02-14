@@ -1,0 +1,202 @@
+:root {
+    --bg-color: #0d1117;
+    --chat-bg: #161b22;
+    --input-bg: #21262d;
+    --text-primary: #e6edf3;
+    --text-secondary: #8b949e;
+    --accent-color: #238636; /* GitHub green style */
+    --accent-hover: #2ea043;
+    --border-color: #30363d;
+    --message-user-bg: #1f6feb;
+    --message-sys-bg: #21262d; 
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+/* App Layout */
+.app-container {
+    width: 100%;
+    max-width: 900px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--chat-bg);
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+}
+
+/* Header */
+header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--chat-bg);
+}
+
+.logo {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    margin-right: 8px;
+    box-shadow: 0 0 8px var(--accent-color);
+}
+
+/* Chat Area */
+main#chat-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.message {
+    padding: 1rem;
+    border-radius: 8px;
+    max-width: 85%;
+    line-height: 1.5;
+    font-size: 0.95rem;
+    position: relative;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.system-message {
+    background-color: var(--message-sys-bg);
+    align-self: flex-start;
+    border: 1px solid var(--border-color);
+}
+
+.user-message {
+    background-color: var(--message-user-bg);
+    color: white;
+    align-self: flex-end;
+}
+
+/* Test Case Table Styling */
+.tc-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    background: #0d1117;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.tc-table th, .tc-table td {
+    padding: 10px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+}
+
+.tc-table th {
+    background-color: #21262d;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.tc-priority-High { color: #f85149; font-weight: bold; }
+.tc-priority-Medium { color: #d29922; }
+.tc-priority-Low { color: #3fb950; }
+
+/* Input Area */
+footer.input-area {
+    padding: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    gap: 10px;
+    background-color: var(--chat-bg);
+}
+
+textarea {
+    flex: 1;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-primary);
+    padding: 12px;
+    font-family: inherit;
+    resize: none;
+    outline: none;
+    min-height: 50px;
+    max-height: 150px;
+}
+
+textarea:focus {
+    border-color: var(--text-secondary);
+}
+
+button#send-btn {
+    background-color: var(--accent-color);
+    border: none;
+    border-radius: 6px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    transition: background 0.2s;
+}
+
+button#send-btn:hover {
+    background-color: var(--accent-hover);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Loader */
+.loader {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
