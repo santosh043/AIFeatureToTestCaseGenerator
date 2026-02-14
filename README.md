@@ -11,6 +11,40 @@ This project uses **Ollama** (specifically the `llama3.2:3b` model) running loca
 - **Modern UI:** Dark-mode, responsive chat interface built with Vanilla JS and CSS.
 - **Customizable:** Easily modify the system prompt in `app.py` to change the test case format.
 
+## 🏗️ Architecture
+
+### System Flow
+```mermaid
+graph TD
+    User[User] -->|Types Feature| UI[Web Interface \n(HTML/JS)]
+    UI -->|POST /generate| Backend[Flask Backend \n(Python)]
+    Backend -->|Prompts| Ollama[Ollama API \n(Localhost:11434)]
+    Ollama -->|Inference| Model[Llama 3.2:3b]
+    Model -->|JSON Response| Ollama
+    Ollama -->|Raw JSON| Backend
+    Backend -->|Validated JSON| UI
+    UI -->|Render Table| User
+```
+
+### Sequence Diagram
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant FE as Frontend (UI)
+    participant BE as Backend (Flask)
+    participant LLM as Ollama (Llama 3.2)
+
+    U->>FE: Enters Feature Description
+    FE->>BE: POST /generate {user_input}
+    BE->>BE: Construct Prompt (Inject System Role)
+    BE->>LLM: POST /api/generate (format: json)
+    LLM->>LLM: Generate Test Cases
+    LLM-->>BE: Return JSON Payload
+    BE->>BE: Validate & Parse JSON
+    BE-->>FE: Return { test_cases: [...] }
+    FE->>U: Display Formatted Table
+```
+
 ## 🛠️ Prerequisites
 
 1.  **Python 3.x** installed.
